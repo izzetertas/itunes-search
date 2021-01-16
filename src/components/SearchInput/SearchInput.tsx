@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { searchSelector } from '../../store/selectors'
+import { searchLoadingSelector } from '../../store/selectors'
 import { fetchItems } from '../../store/searchAction'
 
 import {
@@ -14,8 +14,8 @@ import {
 
 const SearchInput = () => {
   const dispatch = useDispatch()
-  const searchState = useSelector(searchSelector)
-  const [term, setTerm] = useState(searchState.term || '')
+  const isLoading = useSelector(searchLoadingSelector)
+  const [term, setTerm] = useState('')
 
   const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value)
@@ -55,7 +55,7 @@ const SearchInput = () => {
       </InputContainer>
       <SearchButton
         aria-label='Search'
-        disabled={searchState.isLoading || !term.length}
+        disabled={isLoading || !term.length}
         onClick={handleSubmit}
       >
         Search

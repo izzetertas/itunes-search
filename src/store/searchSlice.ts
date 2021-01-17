@@ -1,7 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import iTunesService from '../services/itunesService'
-
-import { AppThunk, RootState } from './index'
 
 export interface IItunesItem {
   artistName: string
@@ -11,7 +8,6 @@ export interface IItunesItem {
   trackPrice: number
   currency: string
 }
-
 export interface ISearchState {
   isLoading?: boolean
   isFetched?: boolean
@@ -32,29 +28,25 @@ export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setItemsRequest: (state, action: PayloadAction<any>) => {
+    setItemsRequest: (state: ISearchState, action: PayloadAction<string>) => {
       state.term = action.payload
       state.isLoading = true
       state.items = []
       state.isFetched = true
     },
-    setMoreItemsRequest: (state) => {
+    setMoreItemsRequest: (state: ISearchState) => {
       state.isLoading = true
       state.fetchNumber = state.fetchNumber + 1
     },
-    setItems: (state, action: PayloadAction<any>) => {
+    setItems: (state: ISearchState, action: PayloadAction<IItunesItem[]>) => {
       state.items = action.payload
       state.isLoading = false
     },
-    setMoreItems: (state, action: PayloadAction<any>) => {
+    setMoreItems: (state: ISearchState, action: PayloadAction<IItunesItem[]>) => {
       state.items = [...state.items, ...action.payload]
       state.isLoading = false
     },
   },
 })
-
-export const {
-  setItems, setItemsRequest, setMoreItems, setMoreItemsRequest,
-} = searchSlice.actions
 
 export default searchSlice.reducer

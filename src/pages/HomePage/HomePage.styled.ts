@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   padding-top: 20px;
 `
 
-export const Header = styled.div`
+export const Header = styled.h1`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -28,7 +28,9 @@ const ResultList = () => {
       }
       {searchState.items.length > 0 &&
         <Items>
-          {searchState.items.map(item => (<SearchResultItem key={item.trackId} {...item} />))}
+          {searchState.items.map(item => (
+            <SearchResultItem key={item.trackId} {...item} />
+          ))}
         </Items>
       }
     </div>
